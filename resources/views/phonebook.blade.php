@@ -11,7 +11,7 @@
     <body>
         <div id="app">
           <my-header></my-header>
-          <Phonebook></Phonebook>
+          <router-view></router-view>
           <my-footer></my-footer>
         </div>
     </body>

@@ -14,15 +14,15 @@
             </div>
             <div class="navbar-menu is-active">
                 <div class="navbar-end">
-                    <a class="navbar-item" href="#">
+                    <nav-link class="navbar-item" :to='{ name: ddd}'>
                         Home
-                    </a>
-                    <a class="navbar-item" href="#">
+                    </nav-link>
+                    <nav-link class="navbar-item" :to='{ name: ddd}'>
                         phoneBook
-                    </a>
-                    <a class="navbar-item" href="#">
+                    </nav-link>
+                    <nav-link class="navbar-item" :to='{ name: ddd}'>
                         Contact
-                    </a>
+                    </nav-link>
                 </div>
             </div>
         </nav>

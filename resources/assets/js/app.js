@@ -15,14 +15,30 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-const taha = require('./components/tahaComponent.vue')
-// let MyHeader = require('./components/MyHeaderComponent.vue')
+
+import VueRouter from 'vue-router';
 
 import MyHeader from './components/MyHeaderComponent.vue'
 import myFooter from './components/FooterComponent.vue'
 import Phonebook from './components/PhonebookComponent.vue'
 import About from './components/AboutComponent.vue'
+
+// let MyHeader = require('./components/MyHeaderComponent.vue')
+Vue.component('example-component', require('./components/ExampleComponent.vue'));
+const taha = require('./components/tahaComponent.vue')
+
+const routes = [
+    {
+        path: '/', component: Phonebook, name: 'phonebook'
+    }
+]
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: routes
+})
+
+Vue.use(VueRouter)
 
 
 const app = new Vue({
@@ -34,4 +50,5 @@ const app = new Vue({
         About,
         Phonebook
     },
+    router: router
 });
