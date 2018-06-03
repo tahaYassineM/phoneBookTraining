@@ -16,7 +16,22 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+const taha = require('./components/tahaComponent.vue')
+// let MyHeader = require('./components/MyHeaderComponent.vue')
+
+import MyHeader from './components/MyHeaderComponent.vue'
+import myFooter from './components/FooterComponent.vue'
+import Phonebook from './components/PhonebookComponent.vue'
+import About from './components/AboutComponent.vue'
+
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    components: {
+        MyHeader,
+        taha,
+        myFooter,
+        About,
+        Phonebook
+    },
 });
