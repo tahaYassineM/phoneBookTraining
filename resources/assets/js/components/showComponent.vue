@@ -6,7 +6,24 @@
                 <button class="delete" aria-label="close" @click="close"></button>
             </header>
             <section class="modal-card-body">
-            <!-- Content ... -->
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <p>{{ showPhonebook.name}}</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Phone</label>
+                    <div class="control">
+                        <p>{{ showPhonebook.phone}}</p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                        <p>{{ showPhonebook.email}}</p>
+                    </div>
+                </div>
             </section>
             <footer class="modal-card-foot">
                 <button class="button is-success" >Save changes</button>
