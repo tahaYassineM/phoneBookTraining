@@ -20,11 +20,11 @@
                 <a>sources</a>
                 <a>forks</a>
             </p>
-            <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fa fa-book" aria-hidden="true"></i>
-                    </span>
-                    <span  class="column is-9"> marksheet </span>
+            <a class="panel-block" v-for="phonebook in allphonebooks" :key="phonebook.id">
+                <span class="panel-icon">
+                    <i class="fa fa-book" aria-hidden="true"></i>
+                </span>
+                <span  class="column is-9"> {{ phonebook.name }} </span>
                 <span class="panel-card column is-1">
                     <i class="has-text-danger fa fa-trash" aria-hidden="true"></i>
                 </span><span class="panel-card column is-1">
@@ -35,7 +35,7 @@
             </a>
         </nav>
         <transition>
-            <add-item :class="{'is-active': isActive}"></add-item>
+            <add-item :open-model='isActive' @closeModel='hideModel'></add-item>
         </transition>
     </div>
 </template>
@@ -48,6 +48,7 @@
         data(){
             return {
                 isActive: false,
+                allphonebooks: [],
             }
         },
         components: {
@@ -56,8 +57,24 @@
         methods: {
             showModel: function(){
                 this.isActive = true
+            },
+            hideModel(){
+                this.isActive = false
+            },
+            getPhonebooks(){
+                axios.get('phonebooks')
+                .then( res => {
+                    this.allphonebooks = res.data
+                    console.log(res.data)
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
             }
         },
+        created(){
+            this.getPhonebooks()
+        }
     }
 </script>
 

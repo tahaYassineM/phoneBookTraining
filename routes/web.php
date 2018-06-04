@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('phonebook');
 });
+
+Route::resource('phonebooks', 'PhonebookController');

@@ -17,6 +17,7 @@ window.Vue = require('vue');
 
 
 import VueRouter from 'vue-router';
+import VeeValidate from 'vee-validate';
 
 import MyHeader from './components/MyHeaderComponent.vue'
 import myFooter from './components/FooterComponent.vue'
@@ -28,6 +29,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 const taha = require('./components/tahaComponent.vue')
 
 Vue.use(VueRouter)
+Vue.use(VeeValidate)
 
 const routes = [
     {
