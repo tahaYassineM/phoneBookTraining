@@ -1,8 +1,9 @@
 <template>
     <div>
-        <nav class="panel">
+        <nav class="panel column is-offset-2 is-8">
             <p class="panel-heading">
-                repositories
+                Vue Js phoneBook Laravel
+                <a class="button is-primary is-rounded is-outlined" @click="showModel()">Add New</a>
             </p>
             <div class="panel-block">
                 <p class="control has-icons-left">
@@ -19,51 +20,44 @@
                 <a>sources</a>
                 <a>forks</a>
             </p>
-            <a class="panel-block is-active">
-                <span class="panel-icon">
-                <i class="fas fa-book" aria-hidden="true"></i>
-                </span>
-                bulma
-            </a>
             <a class="panel-block">
-                <span class="panel-icon">
-                <i class="fas fa-book" aria-hidden="true"></i>
+                    <span class="panel-icon">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                    </span>
+                    <span  class="column is-9"> marksheet </span>
+                <span class="panel-card column is-1">
+                    <i class="has-text-danger fa fa-trash" aria-hidden="true"></i>
+                </span><span class="panel-card column is-1">
+                    <i class="has-text-info fa fa-edit" aria-hidden="true"></i>
+                </span><span class="panel-card column is-1">
+                    <i class="has-text-primary fa fa-eye" aria-hidden="true"></i>
                 </span>
-                marksheet
             </a>
-            <a class="panel-block">
-                <span class="panel-icon">
-                <i class="fas fa-book" aria-hidden="true"></i>
-                </span>
-                minireset.css
-            </a>
-            <a class="panel-block">
-                <span class="panel-icon">
-                <i class="fas fa-book" aria-hidden="true"></i>
-                </span>
-                jgthms.github.io
-            </a>
-            <a class="panel-block">
-                <span class="panel-icon">
-                <i class="fas fa-code-branch" aria-hidden="true"></i>
-                </span>
-                daniellowtw/infboard
-            </a>
-            <a class="panel-block">
-                <span class="panel-icon">
-                <i class="fas fa-code-branch" aria-hidden="true"></i>
-                </span>
-                mojs
-            </a>
-            <label class="panel-block">
-                <input type="checkbox">
-                remember me
-            </label>
-            <div class="panel-block">
-                <button class="button is-link is-outlined is-fullwidth">
-                reset all filters
-                </button>
-            </div>
         </nav>
+        <transition>
+            <add-item :class="{'is-active': isActive}"></add-item>
+        </transition>
     </div>
 </template>
+
+<script>
+
+    import AddItem from './AddComponent.vue'
+
+    export default {
+        data(){
+            return {
+                isActive: false,
+            }
+        },
+        components: {
+            AddItem
+        },
+        methods: {
+            showModel: function(){
+                this.isActive = true
+            }
+        },
+    }
+</script>
+

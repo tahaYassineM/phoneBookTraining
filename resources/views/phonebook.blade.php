@@ -10,9 +10,11 @@
     </head>
     <body>
         <div id="app">
-          <my-header></my-header>
-          <router-view></router-view>
-          <my-footer></my-footer>
+            <my-header></my-header>
+                <div class="container">
+                    <router-view></router-view>
+                </div>
+            <my-footer></my-footer>
         </div>
     </body>
     <script src="{{ mix('js/app.js') }}"></script>

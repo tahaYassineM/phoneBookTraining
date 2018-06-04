@@ -27,9 +27,14 @@ import About from './components/AboutComponent.vue'
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 const taha = require('./components/tahaComponent.vue')
 
+Vue.use(VueRouter)
+
 const routes = [
     {
         path: '/', component: Phonebook, name: 'phonebook'
+    },
+    {
+        path: '/about', component: About, name: 'about'
     }
 ]
 
@@ -38,7 +43,7 @@ const router = new VueRouter({
     routes: routes
 })
 
-Vue.use(VueRouter)
+
 
 
 const app = new Vue({
@@ -47,8 +52,7 @@ const app = new Vue({
         MyHeader,
         taha,
         myFooter,
-        About,
-        Phonebook
+        About
     },
     router: router
 });
