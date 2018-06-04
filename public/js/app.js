@@ -53554,6 +53554,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AddComponent_vue__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AddComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__AddComponent_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__showComponent_vue__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__showComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__showComponent_vue__);
 //
 //
 //
@@ -53596,6 +53598,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
@@ -53604,19 +53608,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             isActive: false,
-            allphonebooks: []
+            showActive: false,
+            allphonebooks: [],
+            itemphonebook: {}
         };
     },
 
     components: {
-        AddItem: __WEBPACK_IMPORTED_MODULE_0__AddComponent_vue___default.a
+        AddItem: __WEBPACK_IMPORTED_MODULE_0__AddComponent_vue___default.a, showItem: __WEBPACK_IMPORTED_MODULE_1__showComponent_vue___default.a
     },
     methods: {
         showModel: function showModel() {
             this.isActive = true;
         },
+        showEye: function showEye($phonebook) {
+            this.showActive = true;
+            this.$children[1].showPhonebook = $phonebook;
+        },
         hideModel: function hideModel() {
             this.isActive = false;
+            this.showActive = false;
         },
         getPhonebooks: function getPhonebooks() {
             var _this = this;
@@ -53991,7 +54002,17 @@ var render = function() {
               _vm._v(" "),
               _vm._m(3, true),
               _vm._m(4, true),
-              _vm._m(5, true)
+              _c("span", { staticClass: "panel-card column is-1" }, [
+                _c("i", {
+                  staticClass: "has-text-primary fa fa-eye",
+                  attrs: { "aria-hidden": "true" },
+                  on: {
+                    click: function($event) {
+                      _vm.showEye(phonebook)
+                    }
+                  }
+                })
+              ])
             ])
           })
         ],
@@ -54007,7 +54028,15 @@ var render = function() {
           })
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("show-item", {
+        attrs: {
+          "show-model": _vm.showActive,
+          "show-phonebook": _vm.itemphonebook
+        },
+        on: { closeModel: _vm.hideModel }
+      })
     ],
     1
   )
@@ -54075,17 +54104,6 @@ var staticRenderFns = [
     return _c("span", { staticClass: "panel-card column is-1" }, [
       _c("i", {
         staticClass: "has-text-info fa fa-edit",
-        attrs: { "aria-hidden": "true" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "panel-card column is-1" }, [
-      _c("i", {
-        staticClass: "has-text-primary fa fa-eye",
         attrs: { "aria-hidden": "true" }
       })
     ])
@@ -54382,6 +54400,148 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(71)
+/* template */
+var __vue_template__ = __webpack_require__(70)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\showComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4f0bc0b9", Component.options)
+  } else {
+    hotAPI.reload("data-v-4f0bc0b9", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { class: ["modal", { "is-active": _vm.showModel }] }, [
+    _c("div", { staticClass: "modal-card" }, [
+      _c("header", { staticClass: "modal-card-head" }, [
+        _c("p", { staticClass: "modal-card-title" }, [_vm._v("Modal title")]),
+        _vm._v(" "),
+        _c("button", {
+          staticClass: "delete",
+          attrs: { "aria-label": "close" },
+          on: { click: _vm.close }
+        })
+      ]),
+      _vm._v(" "),
+      _c("section", { staticClass: "modal-card-body" }),
+      _vm._v(" "),
+      _c("footer", { staticClass: "modal-card-foot" }, [
+        _c("button", { staticClass: "button is-success" }, [
+          _vm._v("Save changes")
+        ]),
+        _vm._v(" "),
+        _c("button", { staticClass: "button", on: { click: _vm.close } }, [
+          _vm._v("Cancel")
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4f0bc0b9", module.exports)
+  }
+}
+
+/***/ }),
+/* 71 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            showPhonebook: {}
+        };
+    },
+
+    props: {
+        showModel: false
+    },
+    methods: {
+        close: function close() {
+            this.$emit('closeModel');
+        }
+    }
+});
 
 /***/ })
 /******/ ]);

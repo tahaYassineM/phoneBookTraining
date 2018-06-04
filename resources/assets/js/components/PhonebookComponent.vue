@@ -30,36 +30,45 @@
                 </span><span class="panel-card column is-1">
                     <i class="has-text-info fa fa-edit" aria-hidden="true"></i>
                 </span><span class="panel-card column is-1">
-                    <i class="has-text-primary fa fa-eye" aria-hidden="true"></i>
+                    <i class="has-text-primary fa fa-eye" aria-hidden="true" v-on:click='showEye(phonebook)'></i>
                 </span>
             </a>
         </nav>
         <transition>
             <add-item :open-model='isActive' @closeModel='hideModel'></add-item>
         </transition>
+            <show-item :show-model="showActive" :show-phonebook="itemphonebook" @closeModel='hideModel'></show-item>
     </div>
 </template>
 
 <script>
 
     import AddItem from './AddComponent.vue'
+    import showItem from './showComponent.vue'
 
     export default {
         data(){
             return {
                 isActive: false,
+                showActive: false,
                 allphonebooks: [],
+                itemphonebook: {}
             }
         },
         components: {
-            AddItem
+            AddItem, showItem
         },
         methods: {
             showModel: function(){
                 this.isActive = true
             },
+            showEye: function($phonebook){
+                this.showActive = true
+                this.$children[1].showPhonebook = $phonebook
+            },
             hideModel(){
                 this.isActive = false
+                this.showActive = false
             },
             getPhonebooks(){
                 axios.get('phonebooks')
