@@ -20,13 +20,13 @@
                 <a>sources</a>
                 <a>forks</a>
             </p>
-            <a class="panel-block" v-for="phonebook in allphonebooks" :key="phonebook.id">
+            <a class="panel-block" v-for="(phonebook, key) in allphonebooks" :key="phonebook.id">
                 <span class="panel-icon">
                     <i class="fa fa-book" aria-hidden="true"></i>
                 </span>
                 <span  class="column is-9"> {{ phonebook.name }} </span>
                 <span class="panel-card column is-1">
-                    <i class="has-text-danger fa fa-trash" aria-hidden="true"></i>
+                    <i class="has-text-danger fa fa-trash" aria-hidden="true" @click="deletPhonebook(key, phonebook.id)"></i>
                 </span><span class="panel-card column is-1">
                     <i class="has-text-info fa fa-edit" aria-hidden="true" @click="updatePhonebook(phonebook)"></i>
                 </span><span class="panel-card column is-1">
@@ -44,10 +44,11 @@
 
 <script>
 
-    import AddItem from './AddComponent.vue'
+    import addItem from './AddComponent.vue'
     import showItem from './showComponent.vue'
-    import UpdateItem from './UpdateComponent.vue';
-
+    import updateItem from './UpdateComponent.vue';
+    import swal from 'sweetalert'
+    
     export default {
         data(){
             return {
@@ -59,9 +60,9 @@
             }
         },
         components: {
-            AddItem, 
+            addItem, 
             showItem,
-            UpdateItem
+            updateItem
         },
         methods: {
             showModel: function(){
@@ -74,6 +75,34 @@
             updatePhonebook: function($phonebook){
                 this.showUpdate = true
                 this.itemphonebook = $phonebook
+            },
+            deletPhonebook(key, id){
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this imaginary file!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            axios.delete(`/phonebooks/${id}`)
+                            .then((response) => {
+                                this.allphonebooks.splice(key, 1)
+                                console.log(this.allphonebooks)
+                                console.log(response.data)
+                            })
+                            .catch((error) => {
+
+                            })
+                            swal("Poof! Your imaginary file has been deleted!", {
+                            icon: "success",
+                            });
+                        } else {
+                            swal("Your imaginary file is safe!");
+                        }
+                    });
+                
             },
             hideModel(){
                 this.isActive = false

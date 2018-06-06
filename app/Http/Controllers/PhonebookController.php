@@ -88,6 +88,6 @@ class PhonebookController extends Controller
      */
     public function destroy(Phonebook $phonebook)
     {
-        //
+        return $this->phonerepository->deletePhonebook($phonebook);
     }
 }

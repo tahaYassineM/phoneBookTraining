@@ -56,4 +56,11 @@ class PhonebookRepository extends Controller
         return response()->json($data, 201);
     }
     
+    public function deletePhonebook(Phonebook $phonebook)
+    {
+        $phonebook->delete();
+        return response()->json([
+            'deleted' => 'the phonebook deleted'
+        ]);
+    }
 }

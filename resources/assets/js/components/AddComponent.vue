@@ -57,8 +57,9 @@
             saveData: function(){
                 axios.post('/phonebooks', this.phonebook)
                 .then(response => {
-                    this.close()                    
-                    console.log(response.data)
+                    this.close()          
+                    this.$parent.allphonebooks.push(response.data.phonebook)          
+                    console.log(response.data.phonebook)
                 })
                 .catch(error => {
                     this.errorsdata = error.response.data.errors
