@@ -28,7 +28,7 @@
                 <span class="panel-card column is-1">
                     <i class="has-text-danger fa fa-trash" aria-hidden="true"></i>
                 </span><span class="panel-card column is-1">
-                    <i class="has-text-info fa fa-edit" aria-hidden="true"></i>
+                    <i class="has-text-info fa fa-edit" aria-hidden="true" @click="updatePhonebook(phonebook)"></i>
                 </span><span class="panel-card column is-1">
                     <i class="has-text-primary fa fa-eye" aria-hidden="true" v-on:click='showEye(phonebook)'></i>
                 </span>
@@ -37,7 +37,8 @@
         <transition>
             <add-item :open-model='isActive' @closeModel='hideModel'></add-item>
         </transition>
-            <show-item :show-model="showActive" :show-phonebook="itemphonebook" @closeModel='hideModel'></show-item>
+            <show-item :show-model="showActive" @closeModel='hideModel'></show-item>
+            <update-item :update-model='showUpdate' :update-phonebook="itemphonebook" @closeModel='hideModel'></update-item>
     </div>
 </template>
 
@@ -45,18 +46,22 @@
 
     import AddItem from './AddComponent.vue'
     import showItem from './showComponent.vue'
+    import UpdateItem from './UpdateComponent.vue';
 
     export default {
         data(){
             return {
                 isActive: false,
                 showActive: false,
+                showUpdate : false,
                 allphonebooks: [],
                 itemphonebook: {}
             }
         },
         components: {
-            AddItem, showItem
+            AddItem, 
+            showItem,
+            UpdateItem
         },
         methods: {
             showModel: function(){
@@ -66,9 +71,14 @@
                 this.showActive = true
                 this.$children[1].showPhonebook = $phonebook
             },
+            updatePhonebook: function($phonebook){
+                this.showUpdate = true
+                this.itemphonebook = $phonebook
+            },
             hideModel(){
                 this.isActive = false
                 this.showActive = false
+                this.showUpdate = false
             },
             getPhonebooks(){
                 axios.get('phonebooks')

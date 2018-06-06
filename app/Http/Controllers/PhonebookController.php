@@ -75,9 +75,9 @@ class PhonebookController extends Controller
      * @param  \App\Phonebook  $phonebook
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Phonebook $phonebook)
+    public function update(PhonebookRequest $request, Phonebook $phonebook)
     {
-        //
+        return $this->phonerepository->updatePhonebook($request, $phonebook);
     }
 
     /**

@@ -46,4 +46,14 @@ class PhonebookRepository extends Controller
             'phonebook' => $phoneb
         ], 201);
     }
+
+    public function updatePhonebook(PhonebookRequest $request, Phonebook $phonebook){
+        $phonebook->update($request->all());
+        $data =[
+            "status" => "201 created",
+            "data" => $phonebook
+        ];
+        return response()->json($data, 201);
+    }
+    
 }
