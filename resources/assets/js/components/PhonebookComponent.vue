@@ -129,11 +129,13 @@
             searchQuery(){
                 if (this.searchQuery.length > 0) {
                     this.tempLists = this.allphonebooks.filter((item) => {
-                        return item.name.toLowerCase().indexOf(this.searchQuery.toLowerCase()) > -1
+                        return Object.keys(item).some((key)=>{
+                            let search = String(item[key])
+                            return search.toLowerCase().indexOf(this.searchQuery.toLowerCase()) > -1
+                        })
                     });
-                    
                 }else{
-                    this.tempLists = this.allphonebookss
+                    this.tempLists = this.allphonebooks
                 }
             }
         }

@@ -53691,10 +53691,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if (this.searchQuery.length > 0) {
                 this.tempLists = this.allphonebooks.filter(function (item) {
-                    return item.name.toLowerCase().indexOf(_this3.searchQuery.toLowerCase()) > -1;
+                    return Object.keys(item).some(function (key) {
+                        var search = String(item[key]);
+                        return search.toLowerCase().indexOf(_this3.searchQuery.toLowerCase()) > -1;
+                    });
                 });
             } else {
-                this.tempLists = this.allphonebookss;
+                this.tempLists = this.allphonebooks;
             }
         }
     }
