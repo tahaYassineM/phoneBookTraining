@@ -7,7 +7,7 @@
             </p>
             <div class="panel-block">
                 <p class="control has-icons-left">
-                <input class="input is-small" type="text" placeholder="search">
+                <input class="input is-small" type="text" placeholder="search" v-model="searchQuery">
                 <span class="icon is-small is-left">
                     <i class="fas fa-search" aria-hidden="true"></i>
                 </span>
@@ -20,7 +20,7 @@
                 <a>sources</a>
                 <a>forks</a>
             </p>
-            <a class="panel-block" v-for="(phonebook, key) in allphonebooks" :key="phonebook.id">
+            <a class="panel-block" v-for="(phonebook, key) in tempLists" :key="phonebook.id">
                 <span class="panel-icon">
                     <i class="fa fa-book" aria-hidden="true"></i>
                 </span>
@@ -56,7 +56,9 @@
                 showActive: false,
                 showUpdate : false,
                 allphonebooks: [],
-                itemphonebook: {}
+                tempLists: {},
+                itemphonebook: {},
+                searchQuery: '',
             }
         },
         components: {
@@ -112,7 +114,7 @@
             getPhonebooks(){
                 axios.get('phonebooks')
                 .then( res => {
-                    this.allphonebooks = res.data
+                     this.tempLists = this.allphonebooks = res.data
                     console.log(res.data)
                 })
                 .catch((error) => {
@@ -122,6 +124,18 @@
         },
         created(){
             this.getPhonebooks()
+        },
+        watch: {
+            searchQuery(){
+                if (this.searchQuery.length > 0) {
+                    this.tempLists = this.allphonebooks.filter((item) => {
+                        return item.name.toLowerCase().indexOf(this.searchQuery.toLowerCase()) > -1
+                    });
+                    
+                }else{
+                    this.tempLists = this.allphonebookss
+                }
+            }
         }
     }
 </script>

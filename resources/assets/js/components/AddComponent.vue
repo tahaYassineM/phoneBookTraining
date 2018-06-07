@@ -51,14 +51,26 @@
             }
         },
         methods:{
+            initial(){
+                this.phonebook = {},
+                this.errorsdata = {}
+            },
             close: function () {
+                this.initial()                    
                 this.$emit('closeModel')
             },
             saveData: function(){
                 axios.post('/phonebooks', this.phonebook)
                 .then(response => {
                     this.close()          
-                    this.$parent.allphonebooks.push(response.data.phonebook)          
+                    this.$parent.allphonebooks.push(response.data.phonebook) 
+                    this.$parent.allphonebooks.sort(function(a, b){
+                        if( a.name > b.name)
+                            return 1
+                        else if(a.name < b.name)
+                            return -1
+                    })   
+                    this.initial()    
                     console.log(response.data.phonebook)
                 })
                 .catch(error => {

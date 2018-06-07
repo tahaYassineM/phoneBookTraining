@@ -18,7 +18,7 @@ class PhonebookRepository extends Controller
     }
 
     public function allPhonebooks(){
-        return $this->phonebook->all();
+        return $this->phonebook->orderby('name', 'ASC')->get();
     }
 
     /**
